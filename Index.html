@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function calculatePayroll() {
+      google.script.run
+        .withSuccessHandler(function(results) {
+          var output = '';
+          if (results.length > 0) {
+            output += '<h3>Payroll Calculation Results:</h3>';
+            output += '<ul>';
+            results.forEach(function(result) {
+              output += '<li>' +
+                'Employee ID: ' + result.employeeId + ', ' +
+                'Name: ' + result.name + ', ' +
+                'Total Pay: ' + result.totalPay +
+                '</li>';
+            });
+            output += '</ul>';
+          } else {
+            output = 'No data found.';
+          }
+          document.getElementById('results').innerHTML = output;
+        })
+        .calculatePayroll(); // Call the Apps Script function
+    }
+
+    function sendPayrollEmails() {
+      google.script.run
+        .withSuccessHandler(function() {
+          alert('Payroll emails have been sent.');
+        })
+        .sendPayrollEmails(); // Call the Apps Script function
+    }
+  </script>
+</head>
+<body>
+  <h1>Payroll Calculator</h1>
+  <button onclick="calculatePayroll()">Calculate Payroll</button>
+  <button onclick="sendPayrollEmails()">Send Payroll Emails</button>
+  <div id="results">Results will be displayed here...</div>
+</body>
+</html>

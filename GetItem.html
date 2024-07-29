@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function getItem() {
+      var itemId = document.getElementById('itemId').value;
+      
+      google.script.run.withSuccessHandler(displayItem).getItem(itemId);
+    }
+
+    function displayItem(item) {
+      var result = document.getElementById('result');
+      if (item) {
+        result.innerHTML = 'Item ID: ' + item[0] + '<br>' +
+                           'Item Name: ' + item[1] + '<br>' +
+                           'Quantity: ' + item[2] + '<br>' +
+                           'Price: ' + item[3] + '<br>' +
+                           'Supplier ID: ' + item[4];
+      } else {
+        result.innerText = 'Item not found.';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>Get Item</h2>
+  <form onsubmit="event.preventDefault(); getItem();">
+    Item ID: <input type="text" id="itemId"><br>
+    <input type="submit" value="Get Item">
+  </form>
+  <p id="result"></p>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function getSupplier() {
+      var supplierId = document.getElementById('supplierId').value;
+
+      google.script.run
+        .withSuccessHandler(function(supplier) {
+          var output = '';
+          if (supplier) {
+            output = '<h3>Supplier Details:</h3>' +
+                     '<p><strong>Supplier ID:</strong> ' + supplier[0] + '</p>' +
+                     '<p><strong>Supplier Name:</strong> ' + supplier[1] + '</p>' +
+                     '<p><strong>Rating:</strong> ' + supplier[2] + '</p>' +
+                     '<p><strong>Details:</strong> ' + supplier[3] + '</p>';
+          } else {
+            output = 'Supplier not found.';
+          }
+          document.getElementById('supplierDetails').innerHTML = output;
+        })
+        .getSupplier(supplierId);
+    }
+  </script>
+</head>
+<body>
+  <h2>Get Supplier Details</h2>
+  <form id="getSupplierForm" onsubmit="event.preventDefault(); getSupplier();">
+    <label for="supplierId">Supplier ID:</label>
+    <input type="text" id="supplierId" name="supplierId" required><br><br>
+    
+    <button type="submit">Get Supplier</button>
+  </form>
+  <div id="supplierDetails">Supplier details will be displayed here...</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function deleteItem() {
+      var itemId = document.getElementById('itemId').value;
+      
+      google.script.run.deleteItem(itemId);
+      document.getElementById('result').innerText = 'Item deleted successfully!';
+    }
+  </script>
+</head>
+<body>
+  <h2>Delete Item</h2>
+  <form onsubmit="event.preventDefault(); deleteItem();">
+    Item ID: <input type="text" id="itemId"><br>
+    <input type="submit" value="Delete Item">
+  </form>
+  <p id="result"></p>
+</body>
+</html>

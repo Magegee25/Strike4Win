@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function addItem() {
+      var itemId = document.getElementById('itemId').value;
+      var itemName = document.getElementById('itemName').value;
+      var quantity = document.getElementById('quantity').value;
+      var price = document.getElementById('price').value;
+      var supplierId = document.getElementById('supplierId').value;
+      
+      google.script.run.addItem(itemId, itemName, quantity, price, supplierId);
+      document.getElementById('result').innerText = 'Item added successfully!';
+    }
+  </script>
+</head>
+<body>
+  <h2>Add Item</h2>
+  <form onsubmit="event.preventDefault(); addItem();">
+    Item ID: <input type="text" id="itemId"><br>
+    Item Name: <input type="text" id="itemName"><br>
+    Quantity: <input type="number" id="quantity"><br>
+    Price: <input type="number" step="0.01" id="price"><br>
+    Supplier ID: <input type="text" id="supplierId"><br>
+    <input type="submit" value="Add Item">
+  </form>
+  <p id="result"></p>
+</body>
+</html>

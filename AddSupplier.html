@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+    function addSupplier() {
+      var supplierId = document.getElementById('supplierId').value;
+      var supplierName = document.getElementById('supplierName').value;
+      var rating = document.getElementById('rating').value;
+      var details = document.getElementById('details').value;
+
+      google.script.run
+        .withSuccessHandler(function() {
+          document.getElementById('status').innerText = 'Supplier added successfully!';
+          document.getElementById('addSupplierForm').reset();
+        })
+        .addSupplier(supplierId, supplierName, rating, details);
+    }
+  </script>
+</head>
+<body>
+  <h2>Add Supplier</h2>
+  <form id="addSupplierForm" onsubmit="event.preventDefault(); addSupplier();">
+    <label for="supplierId">Supplier ID:</label>
+    <input type="text" id="supplierId" name="supplierId" required><br><br>
+    
+    <label for="supplierName">Supplier Name:</label>
+    <input type="text" id="supplierName" name="supplierName" required><br><br>
+    
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" name="rating" step="0.1" required><br><br>
+    
+    <label for="details">Details:</label>
+    <textarea id="details" name="details" required></textarea><br><br>
+    
+    <button type="submit">Add Supplier</button>
+  </form>
+  <p id="status"></p>
+</body>
+</html>
